@@ -19,28 +19,26 @@ class GeoService {
         return result;
     }
 
-    convertGeoData(exifData) {
-        return new Promise((resolve, reject) => {
-            const gps = exifData.gps; 
-            const exifLongitude = gps.GPSLongitude;
-            const exifLatitude = gps.GPSLatitude;
+    async convertGeoData(exifData) {
+        const gps = exifData.gps;
+        const exifLongitude = gps.GPSLongitude;
+        const exifLatitude = gps.GPSLatitude;
 
-            if(!exifLatitude || !exifLongitude) return reject(new Error('Exif data does not contain gps metrics'));
+        if (!exifLatitude || !exifLongitude) throw new Error('Exif data does not contain gps metrics');
 
-            const longitude = GeoService.convertDMSToDD(exifLongitude, gps.GPSLongitudeRef);
-            const latitude = GeoService.convertDMSToDD(exifLatitude, gps.GPSLatitudeRef);
-            const geohash = geohashLib.encode(latitude, longitude, 9);
+        const longitude = GeoService.convertDMSToDD(exifLongitude, gps.GPSLongitudeRef);
+        const latitude = GeoService.convertDMSToDD(exifLatitude, gps.GPSLatitudeRef);
+        const geohash = geohashLib.encode(latitude, longitude, 9);
 
-            resolve({
-                longitude,
-                latitude,
-                geohash,
-                urls: {
-                    googleMaps: `https://maps.google.com/?q=${latitude},${longitude}`,
-                    geohash: `http://geohash.org/${geohash}`
-                }
-            });
-        });
+        return {
+            longitude,
+            latitude,
+            geohash,
+            urls: {
+                googleMaps: `https://maps.google.com/?q=${latitude},${longitude}`,
+                geohash: `http://geohash.org/${geohash}`
+            }
+        };
     };
 
     loadExifDataFrom(pathOrBuffer) {
