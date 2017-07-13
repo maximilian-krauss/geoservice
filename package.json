@@ -8,12 +8,18 @@
     "micro": "^7.3.3",
     "micro-upload": "^1.0.1",
     "microrouter": "^2.1.1",
-    "ngeohash": "^0.6.0"
+    "ngeohash": "^0.6.0",
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.4"
   },
   "devDependencies": {},
   "scripts": {
     "start": "micro"
   },
   "author": "Maximilian Krauß <max@krauss.io>",
-  "license": "MIT"
+  "license": "MIT",
+  "now": {
+    "name": "geoservice",
+    "alias": "max-geoservice"
+  }
 }

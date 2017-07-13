@@ -2,7 +2,8 @@
 
 const Exif = require('exif').ExifImage;
 const geohashLib = require('ngeohash');
-
+const GoogleMapsService = require('./google-maps-service');
+const googleMapsService = new GoogleMapsService();
 
 class GeoService {
 
@@ -57,10 +58,20 @@ class GeoService {
         });
     };
 
+    async resolveAddressFrom(geoData) {
+        return Object.assign(
+            {}, 
+            geoData, 
+            { 
+                address: await googleMapsService.resolveAddressFrom(geoData.latitude, geoData.longitude)
+            });
+    }
+
     extractAndProcessExifDataFrom(pathOrBuffer) {
         return this
             .loadExifDataFrom(pathOrBuffer)
-            .then(exifData => this.convertGeoData(exifData));
+            .then(exifData => this.convertGeoData(exifData))
+            .then(geoData => this.resolveAddressFrom(geoData));
     };
 
 }
