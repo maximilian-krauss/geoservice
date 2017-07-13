@@ -1,0 +1,19 @@
+{
+  "name": "geoservice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "exif": "^0.6.0",
+    "micro": "^7.3.3",
+    "micro-upload": "^1.0.1",
+    "microrouter": "^2.1.1",
+    "ngeohash": "^0.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "micro"
+  },
+  "author": "Maximilian Krauß <max@krauss.io>",
+  "license": "MIT"
+}
