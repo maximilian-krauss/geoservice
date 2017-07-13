@@ -1,13 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+  <head>
+    <title>geoservice - test dialog</title>
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+  </head>
+  <body class="container">
+    <h1>image upload</h1>
 
-<body>
-    <form method="post" enctype="multipart/form-data" action="/">
-        <label>Choose an image
-            <input name="image" type="file" size="50" accept="image/*"> 
-        </label>
-        <button>Submit</button>
+    <form role="form" class="form" onsubmit="return false;">
+      <div class="form-group">
+        <label for="file">Image</label>
+        <input id="file" type="file" class="form-control" accept="image/*" />
+      </div>
+      <button id="upload" type="button" class="btn btn-primary">Upload</button>
     </form>
-</body>
 
+    <pre id="output" class="container"></pre>
+
+    <iframe id="map"
+            width="600" 
+            height="450" 
+            frameborder="0" 
+            style="border:0" 
+            src="" 
+            allowfullscreen></iframe>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>    
+    <script>
+      (function () {
+        var output = document.getElementById('output');
+        var map = document.getElementById('map');
+
+        document.getElementById('upload').onclick = function () {
+          var data = new FormData();
+          data.append('image', document.getElementById('file').files[0]);
+          var config = {
+            onUploadProgress: function(progressEvent) {
+              var percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+            }
+          };
+
+          axios.post('./', data, config)
+            .then(function (res) {
+              output.className = 'container';
+              output.innerText = JSON.stringify(res.data, null, 2);
+              map.src = 'https://www.google.com/maps/embed/v1/place?q='+ res.data.latitude +'%2C'+ res.data.longitude +'&key=AIzaSyBtj8G1L7NNTgb5F2mg0iS4Mqx06Vt3FE4';
+            })
+            .catch(function (err) {
+              output.className = 'container text-danger';
+              output.innerText = err.message;
+            });
+        };
+      })();
+    </script>
+  </body>
 </html>
