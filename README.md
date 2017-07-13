@@ -1,4 +1,4 @@
-# geoservice
+# geoservice 🎉
 Extracts location data from images
 
 [![Deploy to now](https://deploy.now.sh/static/button.svg)](https://deploy.now.sh/?repo=https://github.com/maximilian-krauss/geoservice)
@@ -33,3 +33,5 @@ and the response would look like this:
   "address": "Van Leriuslaan 14-22, 2850 Boom, Belgium"
 }
 ```
+
+Or you could use the simple upload form located at http://localhost:3000/upload 👍
