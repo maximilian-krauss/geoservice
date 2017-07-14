@@ -5,6 +5,8 @@ const { router, get, post } = require('microrouter');
 const { upload } = require('micro-upload');
 const { readFileSync } = require('fs');
 const visualize = require('micro-visualize');
+const microCors = require('micro-cors');
+const cors = microCors({ allowMethods: ['POST'] });
 
 const GeoService = require('./geo-service.js');
 const geoService = new GeoService();
@@ -28,7 +30,10 @@ const greeting = (req, res) => send(res, 200, { state: 'up and running' });
 const notFound = (req, res) => send(res, 404, { error: 'Not found' });
 
 module.exports = router(
-    visualize(upload((post('/', processImage)))),
+    cors(
+        visualize(
+            upload(
+                post('/', processImage)))),
     visualize(get('/', greeting)),
     visualize(get('/upload', uploadForm)),
     visualize(get('/*', notFound))

@@ -6,6 +6,7 @@
   "dependencies": {
     "exif": "^0.6.0",
     "micro": "^7.3.3",
+    "micro-cors": "0.0.4",
     "micro-upload": "^1.0.1",
     "micro-visualize": "^3.0.1",
     "microrouter": "^2.1.1",
@@ -21,9 +22,6 @@
   "license": "MIT",
   "now": {
     "name": "geoservice",
-    "alias": "max-geoservice",
-    "env": {
-      "NODE_ENV": "production"
-    }
+    "alias": "max-geoservice"
   }
 }
