@@ -1,15 +1,18 @@
 'use strict';
 
+// native
+const { readFileSync } = require('fs');
+
+// packages
 const { send } = require('micro');
 const { router, get, post } = require('microrouter');
 const { upload } = require('micro-upload');
-const { readFileSync } = require('fs');
 const visualize = require('micro-visualize');
 const microCors = require('micro-cors');
 const cors = microCors({ allowMethods: ['POST'] });
 
-const GeoService = require('./geo-service.js');
-const geoService = new GeoService();
+// ours
+const geoService = new (require('./geo-service.js'));
 
 const processImage = async (req, res) => {
     if (!req.files) return send(res, 400, { error: 'Please provide an image for processing' });
