@@ -5,23 +5,26 @@
   "main": "index.js",
   "dependencies": {
     "exif": "^0.6.0",
-    "micro": "^7.3.3",
+    "micro": "^8.0.1",
     "micro-cors": "0.0.4",
     "micro-upload": "^1.0.1",
     "micro-visualize": "^3.0.1",
-    "microrouter": "^2.1.1",
+    "microrouter": "^2.2.1",
     "ngeohash": "^0.6.0",
     "request": "^2.81.0",
     "request-promise-native": "^1.0.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "micro-dev": "^1.1.2"
+  },
   "scripts": {
-    "start": "micro"
+    "start": "micro",
+    "dev": "micro-dev"
   },
   "author": "Maximilian Krauß <max@krauss.io>",
   "license": "MIT",
   "now": {
     "name": "geoservice",
-    "alias": "max-geoservice"
+    "alias": "geoservice.krauss.io"
   }
 }
